@@ -1,0 +1,2 @@
+#!/bin/bash
+src-hilite-lesspipe.sh $1

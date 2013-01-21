@@ -1,0 +1,48 @@
+# ADD LOCAL CONFIGURATION HERE
+[alias]
+serve = daemon --reuseaddr --base-path=. --export-all --verbose
+latest-tags = for-each-ref --count=10 --sort='-*authordate'
+
+# DO NOT EDIT BELOW THIS LINE
+[push]
+	default = tracking
+[color]
+diff = auto
+status = auto
+branch = auto
+[core]
+	excludesfile = /home/pimeys/.gitignore-global
+	editor = /usr/bin/gvim
+[format]
+pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
+[alias]
+c = commit -m
+a = add
+di = diff
+dic = diff --cached
+pl = pull
+ps = push
+plre = pull --rebase
+st = status
+out = log origin..HEAD
+qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
+graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+ci = commit
+ca = commit --amend
+	ctags = !.git/hooks/ctags
+[user]
+name = Julius de Bruijn
+email = julius.bruijn@sponsorpay.com
+[giggle]
+main-window-maximized = true
+main-window-geometry = 0x0+0+0
+history-view-vpane-position = 555
+show-graph = true
+main-window-view = HistoryView
+file-view-vpane-position = 720
+[merge]
+tool = gvimdiff
+[init]
+	templatedir = ~/.git_template
+[github]
+	user = pimeys
