@@ -1,0 +1,42 @@
+#!/usr/bin/tclsh8.5
+#
+# Usage: git-unmerged branch1 branch2
+# 
+# Shows all the non-common commits in the two branches, where non-common
+# commits means simply commits with a unique commit *message*.
+
+proc getlog branch {
+    lrange [split [exec git log $branch --oneline] "\n"] 0 400
+}
+
+proc diff {title c1 c2} {
+    puts "\n$title"
+    foreach commit1 $c1 {
+        set found 0
+        set sha [lindex [split $commit1] 0]
+        set msg [join [lrange [split $commit1] 1 end]]
+        foreach commit2 $c2 {
+            set msg2 [join [lrange [split $commit2] 1 end]]
+            if {$msg eq $msg2} {
+                set found 1
+                break
+            }
+        }
+        if {!$found &&
+            ![regexp {Merge (remote-tracking|branch|pull)} $commit1]} {
+            puts "$commit1"
+        }
+    }
+}
+
+if {[llength $::argv] < 2} {
+    puts stderr "Usage: rx <branch1> <branch2>"
+    exit 1
+}
+set branch1 [lindex $::argv 0]
+set branch2 [lindex $::argv 1]
+
+set c1 [getlog $branch1]
+set c2 [getlog $branch2]
+diff "Only in $branch1" [lrange $c1 0 100] $c2
+diff "Only in $branch2" [lrange $c2 0 100] $c1
