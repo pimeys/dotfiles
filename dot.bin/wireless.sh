@@ -1,12 +1,12 @@
 #!/bin/sh
 
-iwconfig eth2 2>&1 | grep -q no\ wireless\ extensions\. && {
+iwconfig wlan0 2>&1 | grep -q no\ wireless\ extensions\. && {
   echo wired
   exit 0
 }
 
-essid=`nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2`
-stngth=`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`
+essid=`iwconfig wlan0 | awk -F '"' '/ESSID/ {print $2}'`
+stngth=`iwconfig wlan0 | awk -F '=' '/Quality/ {print $2}' | cut -d '/' -f 1`
 bars=`expr $stngth / 10`
 
 case $bars in
