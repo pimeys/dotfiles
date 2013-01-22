@@ -1,0 +1,9 @@
+# ADD LOCAL CONFIGURATION HERE
+[ui]
+username = Julius de Bruijn <pimeys@gmail.com>
+verbose = True
+
+# DO NOT EDIT BELOW THIS LINE
+[extensions]
+color =
+hgext.rebase =
