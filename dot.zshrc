@@ -34,8 +34,10 @@ source $HOME/.bash_aliases
 setxkbmap -option apple:badmap
 xmodmap $HOME/.Xmodmap
 
+export VIMCLOJURE_SERVER_JAR="$HOME/.jar/vimclojure/server-2.3.0.jar"
+
 # Customize to your needs...
-export PATH=/opt/java6/jre/bin/:/opt/godi/sbin:/opt/godi/bin:/opt/java/jre/bin:/home/pimeys/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export PATH=/home/pimeys/.bin/:/opt/java6/jre/bin/:/opt/godi/sbin:/opt/godi/bin:/opt/java/jre/bin:/home/pimeys/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 export EDITOR='vim'
