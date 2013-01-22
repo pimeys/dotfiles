@@ -23,11 +23,11 @@ output_percentage = acpi_output[3]
 
 battery_level = case output_percentage.delete('%').to_i
                 when level_colors['red']
-                  "<fc=#dc322f>#{output_percentage}</fc>"
+                  "<fc=#FF0000>#{output_percentage}</fc>"
                 when level_colors['yellow']
-                  "<fc=#b58900>#{output_percentage}</fc>"
+                  "<fc=#FFFF00>#{output_percentage}</fc>"
                 when level_colors['green']
-                  "<fc=#859900>#{output_percentage}</fc>"
+                  "<fc=#00FF00>#{output_percentage}</fc>"
                 else
                   "<fc=#00FF00>#{output_percentage}</fc>"
                 end
