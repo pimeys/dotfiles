@@ -1,11 +1,30 @@
 (require 'package)
 
+;Packages
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
 (setq url-http-attempt-keepalives nil)
 (package-initialize)
 
+;Evil mode setup
 (evil-mode 1)
+(require 'evil-leader)
+(evil-leader/set-leader ",")
+(evil-leader/set-key
+  "f" 'projectile-find-file
+  "a" 'projectile-grep
+  "bl" 'ido-display-buffer
+  "bk" 'ido-kill-buffer
+  "b," 'previous-buffer
+  "b." 'next-buffer
+  "c"  'flash-crosshairs
+  "rc" 'rinari-console
+  "gd" 'magit-diff
+  "gb" 'magit-blame
+  "gl" 'magit-log
+  "gs" 'magit-status)
+
+;Custom
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -19,6 +38,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;Hooks
 
 (defun ruby-mode-hook ()
   (autoload 'ruby-mode "ruby-mode" nil t)
@@ -54,7 +75,13 @@
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
 
+;Look&Feel
+
 (set-face-attribute 'default nil :font "Inconsolata 13")
+(load-theme 'solarized-dark)
+
+;Modes
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -63,7 +90,8 @@
 (column-number-mode t)
 (set-fringe-style -1)
 (tooltip-mode -1)
-(load-theme 'solarized-dark)
+(crosshairs-mode -1)
+
 (projectile-global-mode)
 (setq projectile-enable-caching t)
 (setq projectile-compilation-system 'default)
@@ -86,6 +114,11 @@
 
 (setq rinari-tags-file-name "tags")
 
+(require 'surround)
+(global-surround-mode 1)
+
+;Key config
+
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
 (global-set-key (kbd "C-o")      'previous-buffer)
 (global-set-key (kbd "C-O")      'next-buffer)
@@ -103,21 +136,3 @@
                                        (smex-initialize))
                                    (global-set-key [(shift meta x)] 'smex-major-mode-commands)
                                    (smex-major-mode-commands)))
-
-(require 'evil-leader)
-(evil-leader/set-leader ",")
-(evil-leader/set-key
-  "f" 'projectile-find-file
-  "a" 'projectile-grep
-  "bl" 'ido-display-buffer
-  "bk" 'ido-kill-buffer
-  "b," 'previous-buffer
-  "b." 'next-buffer
-  "c"  'flash-crosshairs
-  "rc" 'rinari-console
-  "gd" 'magit-diff
-  "gb" 'magit-blame
-  "gl" 'magit-log
-  "gs" 'magit-status)
-
-(crosshairs-mode -1)
