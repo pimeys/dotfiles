@@ -46,3 +46,4 @@ tool = gvimdiff
 templatedir = ~/.git_template
 [github]
 user = pimeys
+	oauth-token = cbff7b244ca9c74c4dc8b920d55bd29ed426aa9f
