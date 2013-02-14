@@ -4,3 +4,5 @@
 *.o
 xmonad.errors
 xmonad-x86_64-linux
+dot.emacs.d/projectile.cache
+dot.emacs.d/eshell/
