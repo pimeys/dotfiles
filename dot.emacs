@@ -117,6 +117,7 @@
 (require 'surround)
 (global-surround-mode 1)
 
+(fringe-mode 'left-only)
 ;Key config
 
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
