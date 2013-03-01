@@ -14,6 +14,7 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.Grid
 import System.IO
 import Solarized
 import XMonad.Actions.Promote
@@ -31,7 +32,7 @@ import System.IO (hPutStrLn)
 import GHC.IOBase (Handle)
 
 myTerminal :: String
-myTerminal = "/usr/bin/urxvt +sb -vb"
+myTerminal = "/usr/bin/gnome-terminal"
 
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (0) (1/50) (1) (3/4))
@@ -55,9 +56,9 @@ main = do
         , focusedBorderColor = focusColor
         }
         where
-          gimpLayout = withIM (11/64) (Role "gimp-toolbox") $ ResizableTall 2 (1/118) (11/20) [1] ||| Full
+          gimpLayout = withIM (11/64) (Role "gimp-toolbox") $ ResizableTall 2 (1/118) (11/20) [1]
           myLayout = avoidStruts $ onWorkspace "*" gimpLayout $ layoutHook defaultConfig
-                                 ||| tabbed shrinkText myTheme
+                                 ||| tabbed shrinkText myTheme ||| Grid
           myManageHook = manageDocks <+> manageScratchPad
           hintedTile = HintedTile nmaster delta ratio TopLeft
           nmaster = 1

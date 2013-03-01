@@ -11,8 +11,8 @@ diff = auto
 status = auto
 branch = auto
 [core]
-excludesfile = /home/pimeys/.gitignore-global
-editor = /usr/bin/vim
+	excludesfile = /home/pimeys/.gitignore
+editor = /usr/bin/emacsclient
 [format]
 pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
 [alias]

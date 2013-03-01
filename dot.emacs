@@ -6,21 +6,28 @@
 (setq url-http-attempt-keepalives nil)
 (package-initialize)
 
+(add-to-list 'load-path "~/.emacs.d/elisp")
+
+;mo-git-blame
+(autoload 'mo-git-blame-file "mo-git-blame" nil t)
+(autoload 'mo-git-blame-current "mo-git-blame" nil t)
+
 ;Evil mode setup
 (evil-mode 1)
 (require 'evil-leader)
 (evil-leader/set-leader ",")
 (evil-leader/set-key
-  "f" 'projectile-find-file
-  "a" 'projectile-grep
-  "bl" 'ido-display-buffer
+  "." 'find-tag
+  "f" 'helm-projectile
+  "a" 'projectile-ack
+  "bl" 'buffer-menu
   "bk" 'ido-kill-buffer
   "b," 'previous-buffer
   "b." 'next-buffer
   "c"  'flash-crosshairs
   "rc" 'rinari-console
   "gd" 'magit-diff
-  "gb" 'magit-blame
+  "gb" 'mo-git-blame-current
   "gl" 'magit-log
   "gs" 'magit-status)
 
@@ -77,7 +84,7 @@
 
 ;Look&Feel
 
-(set-face-attribute 'default nil :font "Inconsolata 13")
+(set-default-font "Inconsolata-13")
 (load-theme 'solarized-dark)
 
 ;Modes
@@ -92,13 +99,14 @@
 (tooltip-mode -1)
 (crosshairs-mode -1)
 
+
 (projectile-global-mode)
 (setq projectile-enable-caching t)
 (setq projectile-compilation-system 'default)
 (global-linum-mode t)
-
-(add-to-list 'load-path "~/.emacs.d/elisp")
 (highlight-indentation-mode)
+(require 'auto-complete-config)
+(ac-config-default)
 
 (setq inhibit-startup-message t) ;; No splash screen
 (setq initial-scratch-message nil) ;; No scratch message
@@ -121,8 +129,10 @@
 ;Key config
 
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
-(global-set-key (kbd "C-o")      'previous-buffer)
-(global-set-key (kbd "C-O")      'next-buffer)
+(define-key evil-normal-state-map (kbd "C-o") 'previous-buffer)
+(define-key evil-normal-state-map (kbd "C-p") 'next-buffer)
+(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
 
 (global-set-key [(meta x)] (lambda ()
                              (interactive)
