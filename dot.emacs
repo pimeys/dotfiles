@@ -26,7 +26,11 @@
   "b." 'next-buffer
   "c"  'flash-crosshairs
   "rc" 'rinari-console
-  "gd" 'magit-diff
+  "gg" 'git-gutter:toggle
+  "gd" 'git-gutter:popup-diff
+  "gp" 'git-gutter:previous-hunk
+  "gn" 'git-gutter:next-hunk
+  "gr" 'git-gutter:revert-hunk
   "gb" 'mo-git-blame-current
   "gl" 'magit-log
   "gs" 'magit-status)
@@ -99,6 +103,10 @@
 (tooltip-mode -1)
 (crosshairs-mode -1)
 
+(fringe-mode 'left-only)
+(global-git-gutter-mode t)
+(setq git-gutter:always-show-gutter t)
+(setq git-gutter-fr:side 'left-fringe)
 
 (projectile-global-mode)
 (setq projectile-enable-caching t)
@@ -125,7 +133,6 @@
 (require 'surround)
 (global-surround-mode 1)
 
-(fringe-mode 'left-only)
 ;Key config
 
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
