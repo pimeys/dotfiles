@@ -13,8 +13,6 @@ branch = auto
 [core]
 	excludesfile = /home/pimeys/.gitignore
 editor = /usr/bin/emacsclient
-[format]
-pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
 [alias]
 c = commit -m
 a = add
