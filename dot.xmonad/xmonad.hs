@@ -3,6 +3,7 @@ import XMonad hiding (Tall)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.FadeInactive
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
@@ -49,7 +50,7 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor solarizedBase03 solarizedOrange . wrap "|" "|"
                         , ppTitle = xmobarColor solarizedGreen "" . shorten 50
-                        }
+                        } <+> fadeInactiveLogHook 0.6
         , modMask = mod4Mask
         , keys = \c -> myKeys c `M.union` keys defaultConfig c
         , normalBorderColor = lightBackgroundColor
