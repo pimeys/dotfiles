@@ -3,18 +3,17 @@ Config { font = "xft:inconsolata:size=10:antialias=true"
        , fgColor = "#657b83"
        , position = Top
        , lowerOnStart = True
-       , commands = [ Run Com "/usr/bin/ruby /home/pimeys/.bin/heat.rb" [] "heat" 10
+       , commands = [ Run Com "/usr/bin/ruby /home/pimeys/.bin/heat.rb" [] "heat" 100
                     , Run Cpu ["-L","3","-H","50","--normal","#859900","--high","#dc322f"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Date "%a %b %_d %H:%M" "date" 10
                     , Run Battery ["-t", "Battery: <left>","-l","red","-n","green","-h","lightblue"] 10
-                    , Run Com "/home/pimeys/.bin/wireless.sh" [] "wifi" 30
+                    , Run Com "/home/pimeys/.bin/wireless.sh" [] "wifi" 100
                     , Run Com "/home/pimeys/.bin/audio.sh" [] "audio" 10
-                    , Run Com "/usr/bin/ruby /home/pimeys/.bin/music.rb" [] "music" 10
-                    , Run Com "/usr/bin/ruby /home/pimeys/.bin/bat.rb" [] "battery" 10
+                    , Run Com "/usr/bin/ruby /home/pimeys/.bin/bat.rb" [] "battery" 100
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %wifi% | Vol: %audio% | %cpu% %memory% | %battery% | <fc=#b58900>%date%</fc>" }
+       , template = "%StdinReader% }{ %heat% | %wifi% | Vol: %audio% | %cpu% %memory% | %battery% | <fc=#b58900>%date%</fc>" }

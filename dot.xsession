@@ -1,6 +1,6 @@
 gnome-settings-daemon &
 xrdb $HOME/.Xresources &
-xsetroot -solid "#002B36" &
-exec /usr/bin/emacs --daemon &
+hsetroot -solid "#002B36" &
+xcompmgr &
 exec $HOME/.dropbox-dist/dropboxd &
 exec xmonad

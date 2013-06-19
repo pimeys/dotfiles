@@ -25,6 +25,3 @@ alias ofw='cd ~/code/ruby/ofw'
 alias sps='cd ~/code/ruby/sps'
 alias sws='cd ~/code/ruby/sws'
 alias yrd='cd ~/code/ruby/yrd'
-
-alias emacs='emacsclient -c'
-alias vim='emacsclient -c'

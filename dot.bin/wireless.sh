@@ -8,6 +8,7 @@ iwconfig eth2 2>&1 | grep -q no\ wireless\ extensions\. && {
 essid=`nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2`
 stngth=`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`
 bars=`expr $stngth / 10`
+vpn=`nm-tool |grep VPN |cut -d" " -f4`
 
 case $bars in
   0)  bar='[----------]' ;;
@@ -24,6 +25,6 @@ case $bars in
   *)  bar='[----!!----]' ;;
 esac
 
-echo $essid $bar
+echo $essid $bar $vpn
 
 exit 0
