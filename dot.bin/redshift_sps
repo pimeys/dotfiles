@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PGPASSWORD=`pass redshift-sps` psql -U sps -h redshift.sponsorpay.com -p 5439 -d sponsorpay

@@ -4,5 +4,5 @@ xrdb $HOME/.Xresources &
 xsetroot -solid "#002B36" &
 exec $HOME/.dropbox-dist/dropboxd &
 #exec $HOME/.bin/mopidy &
-exec emacs --daemon &
+exec /usr/bin/emacs --daemon &
 exec xmonad

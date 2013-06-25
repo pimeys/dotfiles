@@ -95,6 +95,6 @@ main = do
               , ((mod4Mask, xK_i), spawn "amixer -c 1 sset Master 0")
               , ((mod4Mask, xK_u), spawn "amixer -c 1 sset Master 1dB-")
               , ((mod4Mask, xK_o), spawn "amixer -c 1 sset Master 1dB")
-              , ((mod4Mask, xK_p), spawn "dmenu_dark")
+              , ((mod4Mask, xK_p), spawn "dmenu_run")
               , ((mod4Mask .|. shiftMask, xK_p), scratchPad)
               ]

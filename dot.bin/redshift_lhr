@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PGPASSWORD=`pass redshift-lhr` psql -U lhr -h speu.c97h1ldykfuk.eu-west-1.redshift.amazonaws.com -p 5439 -d sponsorpay

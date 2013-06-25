@@ -12,7 +12,7 @@ status = auto
 branch = auto
 [core]
 	excludesfile = /home/pimeys/.gitignore
-editor = /usr/bin/emacsclient
+editor = /usr/bin/vim
 [alias]
 c = commit -m
 a = add
@@ -45,3 +45,5 @@ templatedir = ~/.git_template
 [github]
 user = pimeys
 	oauth-token = cbff7b244ca9c74c4dc8b920d55bd29ed426aa9f
+[pretty]
+whatever = "tformat:%Cred%h%Creset -%C(yellow)%d %Creset%s %Cgreen(%an %cr)%Creset"
