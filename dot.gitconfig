@@ -40,6 +40,7 @@ main-window-view = HistoryView
 file-view-vpane-position = 720
 [merge]
 tool = gvimdiff
+	conflictstyle = diff3
 [init]
 templatedir = ~/.git_template
 [github]

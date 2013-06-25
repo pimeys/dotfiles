@@ -8,6 +8,7 @@ iwconfig wlan0 2>&1 | grep -q no\ wireless\ extensions\. && {
 essid=`iwconfig wlan0 | awk -F '"' '/ESSID/ {print $2}'`
 stngth=`iwconfig wlan0 | awk -F '=' '/Quality/ {print $2}' | cut -d '/' -f 1`
 bars=`expr $stngth / 10`
+vpn=`nm-tool |grep VPN |cut -d" " -f4`
 
 case $bars in
   0)  bar='[----------]' ;;
@@ -24,6 +25,6 @@ case $bars in
   *)  bar='[----!!----]' ;;
 esac
 
-echo $essid $bar
+echo $essid $bar $vpn
 
 exit 0
