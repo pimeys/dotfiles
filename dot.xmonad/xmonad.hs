@@ -30,7 +30,7 @@ main = do
     xmonad $ defaultConfig
         { manageHook = manageDocks
         , layoutHook = myLayout
-        , terminal = "/usr/bin/gnome-terminal"
+        , terminal = "/usr/bin/xterm"
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor solarizedBase03 solarizedOrange . wrap "|" "|"
