@@ -4,11 +4,11 @@
 def format_status(status)
   case status
   when "playing"
-    "<fc=#859900>\u203A</fc>"
+    "<fc=#859900>play</fc>"
   when "paused"
-    "<fc=#b58900>||</fc>"
+    "<fc=#b58900>pause</fc>"
   else
-    "<fc=#dc322f>\u00d7</fc>"
+    "<fc=#dc322f>stop</fc>"
   end
 end
 
