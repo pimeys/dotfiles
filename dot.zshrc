@@ -1,3 +1,4 @@
+unset RUBYOPT
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -5,7 +6,10 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="tjkirch_mod"
+ZSH_THEME="powerline"
+
+POWERLINE_HIDE_USER_NAME="true"
+POWERLINE_HIDE_HOST_NAME="true"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -42,8 +46,9 @@ export PATH=/home/pimeys/.bin/:/opt/java6/jre/bin/:/opt/godi/sbin:/opt/godi/bin:
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 export EDITOR='vim'
+export VIMRUNTIME=/usr/share/vim/vim74a
 [[ -s "/home/pimeys/.rvm/scripts/rvm" ]] && source "/home/pimeys/.rvm/scripts/rvm"
 
-PATH=$PATH:$HOME/.rvm/bin:$HOME/.bin:/usr/bin/vendor_perl/ # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin:$HOME/.bin:/usr/bin/vendor_perl/:/opt/bin
 
-eval "$(hub alias -s)"
+#eval "$(hub alias -s)"

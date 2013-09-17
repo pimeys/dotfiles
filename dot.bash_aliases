@@ -1,6 +1,5 @@
 alias al='ssh -l pimeys avaruuslenski.org'
 alias ls='ls --color'
-alias vim='vim --servername VIM'
 
 # Git
 alias gs='git status -sb'
