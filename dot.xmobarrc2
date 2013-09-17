@@ -16,4 +16,4 @@ Config { font = "xft:inconsolata:size=10:antialias=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %music% | Vol: %audio%" }
+       , template = "%heat% }{ %cpu% | %memory% * %swap% | <fc=#b58900>%date%</fc>" }

@@ -8,6 +8,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.SpawnOnce
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.Tabbed
 import XMonad.Layout.HintedTile
@@ -25,6 +26,7 @@ import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Ssh
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Hooks.SetWMName
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -39,6 +41,10 @@ manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (0) (1/50) (1) (3/4))
 scratchPad = scratchpadSpawnActionCustom myTerminal
 
+myStartupHook = do
+        setWMName "LG3D"
+        spawnOnce "xmobar ~/.xmobarrc2 -x 1"
+
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/pimeys/.xmobarrc"
     xmonad $ defaultConfig
@@ -52,6 +58,7 @@ main = do
                         , ppTitle = xmobarColor solarizedGreen "" . shorten 50
                         } <+> fadeInactiveLogHook 0.6
         , modMask = mod4Mask
+        , startupHook = myStartupHook
         , keys = \c -> myKeys c `M.union` keys defaultConfig c
         , normalBorderColor = lightBackgroundColor
         , focusedBorderColor = focusColor
@@ -90,9 +97,9 @@ main = do
 
           myKeys conf@(XConfig {XMonad.modMask = modMask, workspaces = ws}) = M.fromList $
               [
-                ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock") -- meta shift z
-              , ((mod4Mask .|. shiftMask, xK_a), spawn "gvim ~/code/ruby") -- meta shift z
-              , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s") -- print --> screenshot
+                ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+              , ((mod4Mask .|. shiftMask, xK_a), spawn "gvim ~/code/ruby")
+              , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
               , ((mod4Mask, xK_i), spawn "amixer -c 1 sset Master 0")
               , ((mod4Mask, xK_u), spawn "amixer -c 1 sset Master 1dB-")
               , ((mod4Mask, xK_o), spawn "amixer -c 1 sset Master 1dB")
