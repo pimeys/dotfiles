@@ -90,3 +90,20 @@ URxvt.url-select.underline: true
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+
+XTerm*faceName: Monaco for Powerline
+XTerm*faceSize: 13
+XTerm*saveLines: 25000
+XTerm*fastScroll: true
+XTerm*bellIsUrgent: true
+XTerm*visualBell: false
+XTerm*charClass: 35-38:48,43-47:48,58:48,61:48,63:48,95:48,126:48
+XTerm*faceNameDoublesize: WenQuanYi Micro Hei Mono
+
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.dpi: 96
+Xft.rgba: rgb
