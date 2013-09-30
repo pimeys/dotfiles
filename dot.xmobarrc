@@ -12,8 +12,9 @@ Config { font = "xft:inconsolata:size=10:antialias=true"
                     , Run Com "/home/pimeys/.bin/wireless.sh" [] "wifi" 100
                     , Run Com "/home/pimeys/.bin/audio.sh" [] "audio" 10
                     , Run Com "/usr/bin/ruby /home/pimeys/.bin/music.rb" [] "music" 10
+                    , Run Com "/home/pimeys/.bin/ledmon" [] "led" 1
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %music% | Vol: %audio%" }
+       , template = "%StdinReader% }{ %led%" }

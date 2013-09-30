@@ -4,6 +4,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 import XMonad.Util.Scratchpad (scratchpadManageHook, scratchpadSpawnActionCustom)
@@ -42,7 +43,7 @@ manageScratchPad = scratchpadManageHook (W.RationalRect (0) (1/50) (1) (3/4))
 scratchPad = scratchpadSpawnActionCustom myTerminal
 
 myStartupHook = do
-        setWMName "LG3D"
+        ewmhDesktopsStartup >> setWMName "LG3D"
         spawnOnce "xmobar ~/.xmobarrc2 -x 1"
 
 main = do
@@ -51,7 +52,6 @@ main = do
         { manageHook = myManageHook
         , layoutHook = myLayout
         , terminal = myTerminal
-        , workspaces = ["1:code", "2:web", "3:chat", "4:music", "5:tests", "6:gimp", "7:misc", "8:misc", "9:misc"]
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor solarizedBase03 solarizedOrange . wrap "|" "|"
