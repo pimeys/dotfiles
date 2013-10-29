@@ -4,6 +4,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.LayoutHints
@@ -19,18 +20,38 @@ import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Ssh
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.NamedWindows
 
+import qualified XMonad.StackSet as W
 import qualified Data.Map as M
+
 import Data.Ratio
 import System.IO (hPutStrLn)
 import GHC.IOBase (Handle)
 
+
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+instance UrgencyHook LibNotifyUrgencyHook where
+  urgencyHook LibNotifyUrgencyHook w = do
+    name <- getName w
+    wins <- gets windowset
+    whenJust (W.findTag w wins) (flash name)
+    where flash name index = spawn $ "notify-send " ++ "'Workspace "    ++ index     ++ "' "
+                                                    ++ "'Activity in: " ++ show name ++ "' "
+                                                    ++ "--icon=notification-gpm-monitor"
+
+myStartupHook :: X ()
+myStartupHook = do
+  spawn "compton -f -I 0.10 -O 0.10"
+  spawn "notify-send 'Xmonad Started/Recompiled' --icon=emblem-system"
+
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/pimeys/.xmobarrc"
-    xmonad $ defaultConfig
+    xmonad $ ewmh $ withUrgencyHook LibNotifyUrgencyHook $ defaultConfig
         { manageHook = manageDocks
         , layoutHook = myLayout
-        , terminal = "/usr/bin/xterm"
+        , startupHook = myStartupHook
+        , terminal = "/usr/bin/roxterm"
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppCurrent = xmobarColor solarizedBase03 solarizedOrange . wrap "|" "|"
