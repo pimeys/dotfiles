@@ -28,28 +28,43 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt.Ssh
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Hooks.SetWMName
+import XMonad.Util.NamedWindows
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
+
 import Data.Ratio
 import System.IO (hPutStrLn)
 import GHC.IOBase (Handle)
 
 myTerminal :: String
-myTerminal = "/usr/bin/gnome-terminal"
+myTerminal = "/usr/bin/roxterm"
 
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (W.RationalRect (0) (1/50) (1) (3/4))
 scratchPad = scratchpadSpawnActionCustom myTerminal
 
+myStartupHook :: X ()
 myStartupHook = do
-        ewmhDesktopsStartup >> setWMName "LG3D"
-        spawnOnce "xmobar ~/.xmobarrc2 -x 1"
+  ewmhDesktopsStartup >> setWMName "LG3D"
+  spawnOnce "xmobar ~/.xmobarrc2 -x 1"
+  spawn "compton -f -I 0.10 -O 0.10 --vsync opengl --backend glx"
+  spawn "notify-send 'Xmonad Started/Recompiled' --icon=emblem-system"
+
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+instance UrgencyHook LibNotifyUrgencyHook where
+  urgencyHook LibNotifyUrgencyHook w = do
+    name <- getName w
+    wins <- gets windowset
+    whenJust (W.findTag w wins) (flash name)
+    where flash name index = spawn $ "notify-send " ++ "'Workspace "    ++ index     ++ "' "
+                                                    ++ "'Activity in: " ++ show name ++ "' "
+                                                    ++ "--icon=notification-gpm-monitor"
 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/pimeys/.xmobarrc"
-    xmonad $ defaultConfig
-        { manageHook = myManageHook
+    xmonad $ ewmh $ withUrgencyHook LibNotifyUrgencyHook $ defaultConfig
+        { manageHook = manageDocks
         , layoutHook = myLayout
         , terminal = myTerminal
         , logHook = dynamicLogWithPP xmobarPP
