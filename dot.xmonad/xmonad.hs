@@ -87,7 +87,7 @@ main = do
               , fontName = myFont
               }
 
-          myFont = "xft:inconsolata:size=10:antialias=true"
+          myFont = "xft:inconsolata:size=9:antialias=true"
           focusColor = solarizedBase00
           textColor = solarizedBase00
           lightTextColor = solarizedBase00

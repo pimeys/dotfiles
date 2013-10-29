@@ -52,3 +52,5 @@ export VIMRUNTIME=/usr/share/vim/vim74a
 PATH=$PATH:$HOME/.rvm/bin:$HOME/.bin:/usr/bin/vendor_perl/:/opt/bin
 
 #eval "$(hub alias -s)"
+
+doge
