@@ -28,7 +28,7 @@ POWERLINE_HIDE_HOST_NAME="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler zsh-syntax-highlighting)
+plugins=(pass git bundler zsh-syntax-highlighting)
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
@@ -41,16 +41,18 @@ export VIMCLOJURE_SERVER_JAR="$HOME/.jar/vimclojure/server-2.3.0.jar"
 
 export TERM="xterm-256color"
 
+export SCALA_HOME="/usr/local/share/scala"
+
 # Customize to your needs...
-export PATH=/home/pimeys/.bin/:/opt/java6/jre/bin/:/opt/godi/sbin:/opt/godi/bin:/opt/java/jre/bin:/home/pimeys/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export PATH=$PATH:/home/pimeys/.bin/:/opt/java6/jre/bin/:/opt/godi/sbin:/opt/godi/bin:/opt/java/jre/bin:/home/pimeys/.cabal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$SCALA_HOME/bin
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 export EDITOR='vim'
 export VIMRUNTIME=/usr/share/vim/vim74a
 [[ -s "/home/pimeys/.rvm/scripts/rvm" ]] && source "/home/pimeys/.rvm/scripts/rvm"
 
-PATH=$PATH:$HOME/.rvm/bin:$HOME/.bin:/usr/bin/vendor_perl/:/opt/bin
-
 #eval "$(hub alias -s)"
 
 doge
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

@@ -1,4 +1,4 @@
-alias al='ssh -l pimeys avaruuslenski.org'
+alias al='ssh avaruuslenski.org'
 alias ls='ls --color'
 
 # Git

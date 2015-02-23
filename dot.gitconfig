@@ -28,6 +28,7 @@ graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgr
 ci = commit
 ca = commit --amend
 ctags = !.git/hooks/ctags
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [user]
 name = Julius de Bruijn
 email = julius.bruijn@sponsorpay.com
@@ -48,3 +49,5 @@ user = pimeys
 	oauth-token = cbff7b244ca9c74c4dc8b920d55bd29ed426aa9f
 [pretty]
 whatever = "tformat:%Cred%h%Creset -%C(yellow)%d %Creset%s %Cgreen(%an %cr)%Creset"
+[rerere]
+	enabled = 1
