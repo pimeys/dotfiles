@@ -1,5 +1,7 @@
-gnome-settings-daemon &
+#xloadimage -onroot -fullscreen /scratch/wallpaper/city.jpg &
+#feh --bg-fill /scratch/wallpaper/Teufelsberg-25.jpg &
 xrdb $HOME/.Xresources &
-hsetroot -solid "#002B36" &
-#xcompmgr &
-exec xmonad
+#pulseaudio --start &
+emacs --daemon &
+#exec xmonad
+exec startkde

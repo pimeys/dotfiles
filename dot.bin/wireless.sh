@@ -5,10 +5,9 @@ iwconfig eth2 2>&1 | grep -q no\ wireless\ extensions\. && {
   exit 0
 }
 
-essid=`nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2`
-stngth=`nmcli -t -f active,ssid,signal dev wifi|grep yes|cut -d':' -f3`
-bars=`expr $stngth / 10`
-vpn=`nm-tool |grep VPN |cut -d" " -f4`
+essid=`iwconfig wlp3s0 | grep ESSID | cut -d':' -f2`
+stngth=`iwconfig wlp3s0 | grep 'Link Quality' |cut -d'=' -f2|cut -d'/' -f1`
+bars=`expr $stngth / 7`
 
 case $bars in
   0)  bar='[----------]' ;;
@@ -25,6 +24,12 @@ case $bars in
   *)  bar='[----!!----]' ;;
 esac
 
-echo $essid $bar $vpn
+vpn_active=`ip route show |grep tun |head -n1`
+
+if [ "$vpn_active" = "" ]; then
+  echo $essid $bar
+else
+  echo $essid $bar [IPredator]
+fi
 
 exit 0

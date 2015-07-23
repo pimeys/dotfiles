@@ -1,12 +1,7 @@
-xrandr --output VGA1 --left-of HDMI1 &
-xsetroot -solid "#002B36" &
-xsetroot -cursor_name left_ptr &
-start-pulseaudio-x11 &
-xscreensaver -no-splash &
-#/usr/lib/gnome-settings-daemon/gnome-settings-daemon &
+#xloadimage -onroot -fullscreen /scratch/wallpaper/city.jpg &
+#feh --bg-fill /scratch/wallpaper/Teufelsberg-25.jpg &
 xrdb $HOME/.Xresources &
-setxkbmap -option apple:badmap &
-setxkbmap -option caps:escape
-xmodmap $HOME/.Xmodmap &
-~/.dropbox-dist/dropboxd &
-exec xmonad
+#pulseaudio --start &
+emacs --daemon &
+#exec xmonad
+exec startkde

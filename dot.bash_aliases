@@ -1,6 +1,4 @@
-#alias al='ssh -l pimeys avaruuslenski.org'
-alias al='ssh -C -l pimeys ewe7akhcvoejlvzc.onion'
-alias alcp='scp -C -l pimeys ewe7akhcvoejlvzc.onion:'
+alias al='ssh -C -l pimeys avaruuslenski.org'
 alias ls='ls --color'
 
 # Git

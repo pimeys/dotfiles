@@ -27,7 +27,6 @@ import qualified Data.Map as M
 
 import Data.Ratio
 import System.IO (hPutStrLn)
-import GHC.IOBase (Handle)
 
 
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
