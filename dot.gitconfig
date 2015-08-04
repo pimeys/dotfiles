@@ -33,6 +33,7 @@ ca = commit --amend
 [user]
 name = Julius de Bruijn
 email = julius.bruijn@sponsorpay.com
+	signingkey = FC9C2066
 [giggle]
 main-window-maximized = true
 main-window-geometry = 0x0+0+0

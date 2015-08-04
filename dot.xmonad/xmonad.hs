@@ -5,6 +5,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.SetWMName
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.LayoutHints
@@ -41,7 +42,8 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "compton -f -I 0.10 -O 0.10"
+  setWMName "LG3D"
+  spawn "compton -f -I 0.95 -O 0.95"
   spawn "notify-send 'Xmonad Started/Recompiled' --icon=emblem-system"
 
 main = do
