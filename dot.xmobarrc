@@ -8,12 +8,11 @@ Config { font = "xft:inconsolata:size=10:antialias=true"
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Date "%a %b %_d %H:%M" "date" 10
-                    , Run Battery ["-t", "Battery: <left>","-l","red","-n","green","-h","lightblue"] 10
                     , Run Com "/home/pimeys/.bin/wireless.sh" [] "wifi" 10
                     , Run Com "/home/pimeys/.bin/audio.sh" [] "audio" 10
-                    , Run Com "/home/pimeys/.bin/bat.sh" [] "battery" 100
+                    , Run Com "/home/pimeys/.bin/bat.sh" [] "bttry" 100
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %heat% | %wifi% | Vol: %audio% | %cpu% %memory% | %battery% | <fc=#b58900>%date%</fc>" }
+       , template = "%StdinReader% }{ %heat% | %wifi% | %cpu% %memory% | %bttry% | <fc=#b58900>%date%</fc>" }

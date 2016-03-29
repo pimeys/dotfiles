@@ -9,10 +9,10 @@ acpi_output = %x[/usr/bin/acpi].split("\n").map { |output|
 }
 
 status_symbols = {
-  'Unknown'     => '↔',
-  'Full'        => '↔',
-  'Charging'    => '↑',
-  'Discharging' => '↓'
+  'Unknown'     => ":3",
+  'Full'        => ":D",
+  'Charging'    => ":)",
+  'Discharging' => ":("
 }
 
 level_colors = {
