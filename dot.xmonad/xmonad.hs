@@ -51,6 +51,9 @@ main = do
     xmonad $ ewmh $ withUrgencyHook LibNotifyUrgencyHook $ defaultConfig
         { manageHook = manageDocks
         , layoutHook = myLayout
+        , handleEventHook = mconcat
+                          [ docksEventHook
+                          , handleEventHook defaultConfig ]
         , startupHook = myStartupHook
         , terminal = "/usr/bin/roxterm"
         , logHook = dynamicLogWithPP xmobarPP
