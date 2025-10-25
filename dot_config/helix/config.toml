@@ -1,0 +1,13 @@
+theme = "base16_transparent"
+[editor]
+bufferline = "always"
+insert-final-newline = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-inlay-hints = false
+
+[editor.soft-wrap]
+enable = true

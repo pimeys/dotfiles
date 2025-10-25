@@ -1,0 +1,162 @@
+"$schema" = "https://jj-vcs.github.io/jj/prerelease/config-schema.json"
+
+[user]
+name = "Julius de Bruijn"
+email = "julius@nauk.io"
+
+[templates]
+git_push_bookmark = '"julius/" ++ change_id.short()'
+log_node = '''
+  label("node",
+    coalesce(
+      if(!self, label("elided", "~")),
+      if(current_working_copy, label("working_copy", "@")),
+      if(conflict, label("conflict", "×")),
+      if(immutable, label("immutable", "*")),
+      label("normal", "·")
+    )
+  )
+'''
+draft_commit_description = '''
+    concat(
+      coalesce(description, default_commit_description, "\n"),
+      surround(
+        "\nJJ: This commit contains the following changes:\n", "",
+        indent("JJ:     ", diff.stat(72)),
+      ),
+      "\nJJ: ignore-rest\n",
+      diff.git(),
+    )
+'''
+
+[git]
+write-change-id-header = true
+
+[snapshot]
+auto-update-stale = false
+
+[revset-aliases]
+# FIXME (upstream): should this be upstream?
+'user(x)' = 'author(x) | committer(x)'
+
+# Useful to ignore this, in many repos. For repos like `jj` these are
+# consistently populated with a bunch of auto-generated commits, so ignoring it
+# is often nice.
+'gh_pages()' = 'ancestors(remote_bookmarks(exact:"gh-pages"))'
+
+# trunk() by default resolves to the latest 'main'/'master' remote bookmark. May
+# require customization for repos like nixpkgs.
+'trunk()' = 'latest((present(main) | present(master)) & remote_bookmarks())'
+
+# Private and WIP commits that should never be pushed anywhere. Often part of
+# work-in-progress merge stacks.
+'wip()' = 'description(glob:"wip:*")'
+'private()' = 'description(glob:"private:*")'
+'blacklist()' = 'wip() | private()'
+
+# stack(x, n) is the set of mutable commits reachable from 'x', with 'n'
+# parents. 'n' is often useful to customize the display and return set for
+# certain operations. 'x' can be used to target the set of 'roots' to traverse,
+# e.g. @ is the current stack.
+'stack()' = 'ancestors(reachable(@, mutable()), 2)'
+'stack(x)' = 'ancestors(reachable(x, mutable()), 2)'
+'stack(x, n)' = 'ancestors(reachable(x, mutable()), n)'
+
+# The current set of "open" works. It is defined as:
+#
+# - given the set of commits not in trunk, that are written by me,
+# - calculate the given stack() for each of those commits
+#
+# n = 1, meaning that nothing from `trunk()` is included, so all resulting
+# commits are mutable by definition.
+'open()' = 'stack(trunk().. & mine(), 1)'
+
+# the set of 'ready()' commits. defined as the set of open commits, but nothing
+# that is blacklisted or any of their children.
+#
+# often used with gerrit, which you can use to submit whole stacks at once:
+#
+# - jj gerrit send -r 'ready()' --dry-run
+'ready()' = 'open() ~ blacklist()::'
+
+# Find the latest megamerge. Mostly useful in combination with other aliases.
+# FIXME: I wish there was a way to assert that there should only be a resultset
+# of size 1 for this, because this assumes that there's only one megamerge on
+# your current path to the root.
+'megamerge()' = 'reachable(stack(), merges())'
+
+[aliases]
+d = ["diff"]
+s = ["show"]
+ll = ["log", "-T", "builtin_log_detailed"]
+nt = ["new", "trunk()"]
+f = ["git", "fetch"]
+
+# Get all open stacks of work.
+open = ["log", "-r", "open()"]
+credit = ["file", "annotate"]
+
+# Retrunk a series. Typically used as `jj retrunk -s ...`, and notably can be
+# used with open:
+# - jj retrunk -s 'all:roots(open())'
+retrunk = ["rebase", "-d", "trunk()"]
+
+# Retrunk the current stack of work.
+reheat = ["rebase", "-d", "trunk()", "-s", "all:roots(trunk()..stack(@))"]
+
+# Assumes the existence of a 'megamerge' bookmark and 'trunk()' resolving
+# properly to a single commit. Then 'jj sandwich xyz' to move xyz into the
+# megamerge in parallel to everything else.
+sandwich = ["rebase", "-B", "megamerge()", "-A", "trunk()", "-r"]
+
+# Take content from any change, and move it into @.
+# - jj consume xyz path/to/file`
+consume = ["squash", "--into", "@", "--from"]
+
+# Eject content from @ into any other change.
+# - jj eject xyz --interactive
+eject = ["squash", "--from", "@", "--into"]
+
+# Find the closest ancestor with a bookmark pointing at it, and move it to the
+# parent of the working copy.
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+
+[ui]
+default-command = "status"
+diff-formatter = "difft"
+merge-editor = "zed"
+log-synthetic-elided-nodes = true
+pager = { command = ["less", "-FRX"], env = { LESSCHARSET = "utf-8" } }
+diff-editor = ":builtin"
+
+[colors]
+# Base customizations
+"normal change_id" = { bold = true, fg = "magenta" }
+"immutable change_id" = { bold = false, fg = "bright cyan" }
+
+# Used by log node template
+"node" = { bold = true }
+"node elided" = { fg = "bright black" }
+"node working_copy" = { fg = "green" }
+"node conflict" = { fg = "red" }
+"node immutable" = { fg = "bright cyan" }
+"node wip" = { fg = "yellow" }
+"node normal" = { bold = false }
+
+# Used in other various templates
+"text link" = { bold = true, fg = "magenta" }
+"text warning" = { bold = true, fg = "red" }
+
+[merge-tools.difft]
+program = "difft"
+diff-args = ["--color=always", "$left", "$right"]
+
+[merge-tools.mergiraf]
+program = "mergiraf"
+merge-args = ["merge", "$base", "$left", "$right", "-o", "$output", "--fast"]
+merge-conflict-exit-codes = [1]
+conflict-marker-style = "git"
+
+[template-aliases]
+"format_timestamp(timestamp)" = "timestamp.ago()"
+

@@ -1,0 +1,13 @@
+directory: /mnt/music
+fetchart:
+  auto: true
+import:
+  autotag: true
+  move: true
+library: /home/pimeys/.config/musiclibrary.blb
+permissions:
+  dir: 755
+  file: 644
+plugins: musicbrainz convert fetchart permissions
+replaygain:
+  backend: command
