@@ -43,3 +43,13 @@ You know where to find them. Copy them in place.
 ## Certificate
 
 Your home network uses a custom CA. You need to install it to Firefox. It's in the secrets, the file is called `ca.crt`.
+
+## Roon
+
+Use the soda-9.0-1 launcher. Use these launch options:
+
+```sh
+WINEDLLOVERRIDES="windows.media.mediacontrol=" %command% -scalefactor=1
+```
+
+Change scale factor to match your desktop.
