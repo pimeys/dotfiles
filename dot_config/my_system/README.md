@@ -53,3 +53,11 @@ WINEDLLOVERRIDES="windows.media.mediacontrol=" %command% -scalefactor=1
 ```
 
 Change scale factor to match your desktop.
+
+## SSH agent
+
+```bash
+systemctl --user enable ssh-agent
+systemctl --user start ssh-agent
+ssh-add /path/to/key
+```
