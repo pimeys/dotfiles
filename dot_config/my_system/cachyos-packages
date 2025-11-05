@@ -47,6 +47,7 @@ cachyos-v3-mirrorlist
 cachyos-v4-mirrorlist
 cachyos-wallpapers
 cachyos-zsh-config
+cantarell-fonts
 cargo-binstall
 cargo-insta
 cargo-nextest
@@ -59,7 +60,6 @@ cryptsetup
 cups
 cups-filters
 cups-pdf
-cursor-bin
 device-mapper
 dhclient
 difftastic
@@ -94,12 +94,18 @@ foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foomatic-db-ppds
 fsarchiver
+fuse2
 fwupd
 gemini-cli
 ghostscript
 git
 github-cli
 glances
+google-cloud-cli
+google-cloud-cli-bq
+google-cloud-cli-bundled-python3-unix
+google-cloud-cli-component-gke-gcloud-auth-plugin
+google-cloud-cli-gsutil
 grub
 grub-btrfs-support
 grub-hook
@@ -132,6 +138,7 @@ kdialog
 kinfocenter
 kio-admin
 konsole
+krita
 kscreen
 kwallet-pam
 kwalletmanager
@@ -153,6 +160,7 @@ logrotate
 lsb-release
 lsscsi
 lvm2
+lynx
 man-db
 man-pages
 mdadm
@@ -202,6 +210,7 @@ plasma-workspace
 plocate
 plymouth
 plymouth-kcm
+pnpm
 poppler-glib
 power-profiles-daemon
 powerdevil
@@ -209,12 +218,14 @@ pv
 python
 python-certifi
 python-defusedxml
+python-fuse
 python-packaging
 python-requests
 qt6-wayland
 rebuild-detector
 reflector
 ripgrep
+roonbridge
 rsync
 rtkit
 s-nail
@@ -235,9 +246,11 @@ sudo
 sysfsutils
 system-config-printer
 tailscale
+taplo-cli
 tcpdump
 texinfo
 thunderbird
+tokei
 tree
 ttf-bitstream-vera
 ttf-dejavu
@@ -245,6 +258,7 @@ ttf-liberation
 ttf-meslo-nerd
 ttf-opensans
 ufw
+ungoogled-chromium-bin
 unrar
 unzip
 upower
@@ -252,6 +266,7 @@ usb_modeswitch
 usbutils
 vi
 vim
+vlc-plugins-all
 vulkan-radeon
 wget
 which
