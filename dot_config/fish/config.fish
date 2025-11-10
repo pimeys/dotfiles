@@ -13,3 +13,6 @@ export EDITOR=helix
 #function fish_greeting
 #    # smth smth
 #end
+
+# aiproxy
+set --export PATH /home/pimeys/.aiproxy/bin $PATH
