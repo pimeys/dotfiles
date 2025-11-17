@@ -1,0 +1,20 @@
+services:
+  roon-bridge:
+    build:
+      context: .
+    container_name: roon-bridge
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ:-UTC}
+      - ROON_DATAROOT=/var/roon
+      - ROON_ID_DIR=/var/roon
+    devices:
+      - /dev/snd
+    group_add:
+      - ${AUDIO_GID:-63}
+    volumes:
+      - ./roon-state:/var/roon
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp

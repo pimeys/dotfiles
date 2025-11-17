@@ -1,0 +1,31 @@
+[Unit]
+Description=Roon Bridge (Docker)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/roon-bridge
+ExecStartPre=/usr/bin/docker pull ${ROON_BRIDGE_IMAGE:-elgeeko/roon-bridge:latest}
+ExecStartPre=/usr/bin/docker volume create roon-bridge-data
+ExecStartPre=/usr/bin/docker volume create roon-bridge-cache
+ExecStartPre=-/usr/bin/docker rm -f roon-bridge
+ExecStart=/usr/bin/docker run \
+  --name roon-bridge \
+  --network host \
+  --volume roon-bridge-data:/opt/RoonBridge \
+  --volume roon-bridge-cache:/var/roon \
+  --volume /run/udev:/run/udev:ro \
+  --device /dev/bus/usb \
+  --device /dev/snd \
+  --group-add ${AUDIO_GID:-29} \
+  ${ROON_BRIDGE_IMAGE:-elgeeko/roon-bridge:latest}
+ExecStop=/usr/bin/docker stop roon-bridge
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

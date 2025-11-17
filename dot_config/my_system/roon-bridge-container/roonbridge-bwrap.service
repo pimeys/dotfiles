@@ -1,0 +1,27 @@
+[Unit]
+Description=Roon Bridge (systemd bubblewrap sandbox)
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Environment="ROON_ROOT=/opt/RoonBridge"
+Environment="ROON_STATE=/var/roon"
+EnvironmentFile=-/etc/default/roon-bridge
+ExecStart=/usr/local/libexec/roonbridge-bwrap.sh
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+LockPersonality=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+SystemCallFilter=@system-service
+
+[Install]
+WantedBy=multi-user.target

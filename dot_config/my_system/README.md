@@ -53,3 +53,5 @@ WINEDLLOVERRIDES="windows.media.mediacontrol=" %command% -scalefactor=1
 ```
 
 Change scale factor to match your desktop.
+
+For the headless endpoint, run `roon-bridge` via the Docker systemd unit in `roon-bridge-container/`. That README covers installing `/etc/default/roon-bridge`, enabling `roonbridge-docker.service`, and keeping the DX9 power-cycle from dropping USB HID devices.
