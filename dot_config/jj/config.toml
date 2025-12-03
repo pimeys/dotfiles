@@ -46,7 +46,7 @@ auto-update-stale = false
 
 # trunk() by default resolves to the latest 'main'/'master' remote bookmark. May
 # require customization for repos like nixpkgs.
-'trunk()' = 'latest((present(main) | present(master)) & remote_bookmarks())'
+'trunk()' = 'latest(remote_bookmarks("main") | remote_bookmarks("master"))'
 
 # Private and WIP commits that should never be pushed anywhere. Often part of
 # work-in-progress merge stacks.
@@ -159,4 +159,3 @@ conflict-marker-style = "git"
 
 [template-aliases]
 "format_timestamp(timestamp)" = "timestamp.ago()"
-
