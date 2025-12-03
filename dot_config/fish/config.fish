@@ -8,6 +8,8 @@ alias zed="zeditor"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export EDITOR=helix
 
+eval "$(direnv hook fish)"
+
 # overwrite greeting
 # potentially disabling fastfetch
 #function fish_greeting
