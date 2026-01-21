@@ -8,6 +8,10 @@ alias zed="zeditor"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export EDITOR=helix
 
+function sudo --description 'alias sudo=run0'
+    run0 --background="" $argv
+end
+
 eval "$(direnv hook fish)"
 
 # overwrite greeting

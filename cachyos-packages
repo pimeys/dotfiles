@@ -15,7 +15,6 @@ aws-cli
 base
 base-devel
 bash-completion
-beeper-v4-bin
 beets
 bind
 bluedevil
@@ -54,7 +53,6 @@ cargo-insta
 cargo-nextest
 cargo-pgrx
 char-white
-charles-bundled-java
 chezmoi
 chwd
 claude-code
@@ -63,9 +61,6 @@ cryptsetup
 cups
 cups-filters
 cups-pdf
-cursor-bin
-datagrip
-datagrip-jre
 device-mapper
 dhclient
 difftastic
@@ -196,7 +191,6 @@ pacman-contrib
 pandoc-cli
 paru
 pavucontrol
-pcem-git
 perl
 phonon-qt6-vlc
 pipewire-alsa
@@ -239,7 +233,6 @@ sg3_utils
 skanpage
 smartmontools
 snapper
-snapper-rollback
 sof-firmware
 spectacle
 speedcrunch
