@@ -8,8 +8,10 @@ alsa-firmware
 alsa-plugins
 alsa-utils
 amd-ucode
+ansible
 ark
 awesome-terminal-fonts
+aws-cli
 base
 base-devel
 bash-completion
@@ -50,7 +52,9 @@ cachyos-zsh-config
 cargo-binstall
 cargo-insta
 cargo-nextest
+cargo-pgrx
 char-white
+charles-bundled-java
 chezmoi
 chwd
 claude-code
@@ -60,10 +64,13 @@ cups
 cups-filters
 cups-pdf
 cursor-bin
+datagrip
+datagrip-jre
 device-mapper
 dhclient
 difftastic
 diffutils
+direnv
 discover
 dmidecode
 dmraid
@@ -93,6 +100,7 @@ foomatic-db-gutenprint-ppds
 foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foomatic-db-ppds
+freetube
 fsarchiver
 fwupd
 gemini-cli
@@ -170,6 +178,7 @@ networkmanager
 networkmanager-openvpn
 nfs-utils
 nilfs-utils
+nix
 noto-color-emoji-fontconfig
 noto-fonts
 noto-fonts-cjk
@@ -179,12 +188,15 @@ ntp
 octopi
 openai-codex
 opencl-mesa
+opencode
 opendesktop-fonts
 openssh
 os-prober
 pacman-contrib
+pandoc-cli
 paru
 pavucontrol
+pcem-git
 perl
 phonon-qt6-vlc
 pipewire-alsa
@@ -202,7 +214,9 @@ plasma-workspace
 plocate
 plymouth
 plymouth-kcm
+pnpm
 poppler-glib
+postgresql
 power-profiles-daemon
 powerdevil
 pv
@@ -222,6 +236,7 @@ sbctl
 sddm
 sddm-kcm
 sg3_utils
+skanpage
 smartmontools
 snapper
 snapper-rollback
@@ -244,6 +259,7 @@ ttf-dejavu
 ttf-liberation
 ttf-meslo-nerd
 ttf-opensans
+typst
 ufw
 unrar
 unzip
