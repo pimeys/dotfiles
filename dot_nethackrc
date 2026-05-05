@@ -1,0 +1,6 @@
+OPTIONS=windowtype:curses
+OPTIONS=perm_invent
+OPTIONS=menucolors
+MENUCOLOR=" blessed"=green
+MENUCOLOR=" cursed"=red&bold
+MENUCOLOR=" uncursed"=cyan
