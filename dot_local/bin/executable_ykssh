@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+provider="${YKSSH_PROVIDER:-/usr/lib64/pkcs11/opensc-pkcs11.so}"
+original_socket="${SSH_AUTH_SOCK:-}"
+socket="${YKSSH_AUTH_SOCK:-/run/user/$(id -u)/ssh-agent.socket}"
+runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+lock_file="$runtime_dir/ykssh.lock"
+force_restart=1
+check_only=0
+
+usage() {
+  cat <<'EOF'
+Usage: ykssh [--no-restart] [--check]
+
+Reload the YubiKey PIV PKCS#11 provider into the systemd user ssh-agent.
+
+Options:
+  --no-restart
+             Try unloading the PKCS#11 provider without restarting ssh-agent first.
+             The default is to restart ssh-agent because stale PKCS#11 helper
+             state is the common failure mode.
+  --check    Show current agent/socket/key state without changing it.
+  -h, --help Show this help.
+
+Environment:
+  YKSSH_PROVIDER   PKCS#11 provider path.
+  YKSSH_AUTH_SOCK  ssh-agent socket path.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --restart)
+      force_restart=1
+      ;;
+    --no-restart)
+      force_restart=0
+      ;;
+    --check)
+      check_only=1
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      printf 'ykssh: unknown argument: %s\n' "$1" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+  shift
+done
+
+if [ ! -r "$provider" ]; then
+  printf 'ykssh: PKCS#11 provider is not readable: %s\n' "$provider" >&2
+  exit 1
+fi
+
+mkdir -p "$runtime_dir"
+exec 9>"$lock_file"
+flock 9
+
+export SSH_AUTH_SOCK="$socket"
+
+systemctl --user start ssh-agent.socket >/dev/null
+
+if [ ! -S "$socket" ]; then
+  printf 'ykssh: ssh-agent socket does not exist: %s\n' "$socket" >&2
+  exit 1
+fi
+
+if [ "$check_only" -eq 1 ]; then
+  printf 'SSH_AUTH_SOCK=%s\n' "$socket"
+  printf 'YKSSH_PROVIDER=%s\n' "$provider"
+  systemctl --user --no-pager --quiet status ssh-agent.service || true
+  SSH_AUTH_SOCK="$socket" timeout 8s ssh-add -l || true
+  exit 0
+fi
+
+if [ "$force_restart" -eq 1 ]; then
+  systemctl --user restart ssh-agent.service
+else
+  set +e
+  SSH_AUTH_SOCK="$socket" timeout 8s ssh-add -e "$provider" >/dev/null 2>&1
+  unload_status=$?
+  set -e
+  if [ "$unload_status" -eq 124 ]; then
+    printf 'ykssh: ssh-add -e timed out; restarting ssh-agent.service\n' >&2
+    systemctl --user restart ssh-agent.service
+  fi
+fi
+
+printf 'ykssh: adding PKCS#11 provider; enter the PIV PIN when prompted\n' >&2
+SSH_AUTH_SOCK="$socket" ssh-add -s "$provider"
+
+printf 'ykssh: loaded agent keys:\n' >&2
+SSH_AUTH_SOCK="$socket" ssh-add -L
+
+if [ "$original_socket" != "$socket" ]; then
+  printf 'ykssh: if your shell uses another agent, run in fish: set -gx SSH_AUTH_SOCK %s\n' "$socket" >&2
+fi

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+remote="fish://julius@titan-2"
+remote_dir="/home/julius/Screenshots"
+filename="Screenshot_$(date +%Y%m%d_%H%M%S).png"
+local_file="$(mktemp --suffix=.png)"
+
+cleanup() {
+  rm -f "$local_file"
+}
+
+trap cleanup EXIT
+
+if ! spectacle --region --background --nonotify --output "$local_file"; then
+  notify-send "Screenshot upload failed" "Spectacle could not capture the screenshot"
+  exit 1
+fi
+
+if [[ ! -s "$local_file" ]]; then
+  exit 0
+fi
+
+if ! kioclient --interactive copy "$local_file" "$remote$remote_dir/$filename"; then
+  notify-send "Screenshot upload failed" "Could not upload to $remote"
+  exit 1
+fi
+
+printf '%s' "$remote_dir/$filename" | wl-copy
+notify-send "Screenshot uploaded" "$remote_dir/$filename copied to clipboard"
