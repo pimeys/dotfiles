@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Yubico Authenticator
+GenericName=Yubico Authenticator
+Exec=/home/pimeys/.local/bin/yubico-authenticator
+Icon=com.yubico.yubioath
+Type=Application
+Categories=Utility;
+Keywords=Yubico;Authenticator;
+X-Flatpak=com.yubico.yubioath

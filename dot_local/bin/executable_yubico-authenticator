@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+systemctl --user reload yubikey-agent.service
+exec /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=authenticator com.yubico.yubioath "$@"
