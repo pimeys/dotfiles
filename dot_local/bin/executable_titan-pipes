@@ -8,9 +8,12 @@ ssh -L 3000:julius:3000 \
     -L 5051:julius:5051 \
     -L 9002:julius:9002 \
     -L 9003:julius:9003 \
-    -L 9004:julius:9004 \
     -L 9005:julius:9005 \
     -L 9014:julius:9014 \
+    -L 9187:julius:9187 \
+    -L 9101:julius:9101 \
+    -L 9090:julius:9090 \
+    -L 3010:julius:3010 \
     -L 5175:julius:5175 \
     -L 19092:julius:19092 \
     -L 23399:julius:23399 \
