@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+ssh -L 3000:julius:3000 \
+    -L 3001:julius:3001 \
+    -L 3002:julius:3002 \
+    -L 3004:julius:3004 \
+    -L 3005:julius:3005 \
+    -L 5050:julius:5050 \
+    -L 5051:julius:5051 \
+    -L 9002:julius:9002 \
+    -L 9003:julius:9003 \
+    -L 9004:julius:9004 \
+    -L 9005:julius:9005 \
+    -L 9014:julius:9014 \
+    -L 5175:julius:5175 \
+    -L 19092:julius:19092 \
+    -L 23399:julius:23399 \
+    -L 50052:julius:50052 \
+    -L 50055:julius:50055 \
+    -L 50056:julius:50056 \
+    -p 2222 \
+    -A \
+    julius@titan
