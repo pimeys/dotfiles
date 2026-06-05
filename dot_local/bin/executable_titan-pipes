@@ -22,4 +22,4 @@ ssh -L 3000:julius:3000 \
     -L 50056:julius:50056 \
     -p 2222 \
     -A \
-    julius@titan
+    julius@titan-2
